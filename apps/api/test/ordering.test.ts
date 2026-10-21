@@ -5,7 +5,7 @@ import {
   positionAtIndex,
   positionBetween,
   rebalancedPositions,
-} from "@synkro/shared";
+} from "@velora/shared";
 
 const items = (...positions: number[]) => positions.map((position, i) => ({ id: `i${i}`, position }));
 

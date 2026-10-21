@@ -2,7 +2,7 @@
 
 import { memo } from "react";
 import { Draggable, Droppable } from "@hello-pangea/dnd";
-import type { Card, List } from "@synkro/shared";
+import type { Card, List } from "@velora/shared";
 import { CardTile } from "./CardTile";
 import { Composer, InlineEdit } from "./InlineEdit";
 import { useSession } from "./SessionContext";

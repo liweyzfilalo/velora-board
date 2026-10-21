@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import type { NextFunction, Request, Response } from "express";
-import type { User } from "@synkro/shared";
+import type { User } from "@velora/shared";
 import { config } from "../config";
 import { pool } from "../db/pool";
 import { AppError } from "../lib/errors";

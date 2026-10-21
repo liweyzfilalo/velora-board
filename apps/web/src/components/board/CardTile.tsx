@@ -2,7 +2,7 @@
 
 import { memo } from "react";
 import { Draggable } from "@hello-pangea/dnd";
-import type { Card } from "@synkro/shared";
+import type { Card } from "@velora/shared";
 import { Avatar } from "@/components/ui";
 import { useAuth } from "@/store/auth";
 import { useBoard } from "@/store/board";

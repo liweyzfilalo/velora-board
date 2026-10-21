@@ -7,7 +7,7 @@ import {
   type ClientToServerEvents,
   type ErrorCode,
   type ServerToClientEvents,
-} from "@synkro/shared";
+} from "@velora/shared";
 import { API_URL } from "@/lib/api";
 import { useBoard } from "@/store/board";
 import { toast } from "@/store/toasts";

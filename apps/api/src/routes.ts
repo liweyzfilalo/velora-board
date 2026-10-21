@@ -1,6 +1,6 @@
 import { Router, type NextFunction, type Request, type Response } from "express";
 import { z } from "zod";
-import type { AuthResponse } from "@synkro/shared";
+import type { AuthResponse } from "@velora/shared";
 import { currentUser, login, register, requireAuth, signToken } from "./auth/auth";
 import * as boards from "./boards/service";
 import { AppError, toAppError } from "./lib/errors";

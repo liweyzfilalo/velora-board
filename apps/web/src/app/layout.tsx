@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Synkro — tableaux collaboratifs en temps réel",
+  title: "Velora Board — tableaux collaboratifs en temps réel",
   description: "Kanban collaboratif temps réel : présence, curseurs live, chat et synchronisation instantanée.",
 };
 

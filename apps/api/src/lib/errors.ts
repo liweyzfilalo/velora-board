@@ -1,4 +1,4 @@
-import type { ErrorCode } from "@synkro/shared";
+import type { ErrorCode } from "@velora/shared";
 import { ZodError } from "zod";
 
 const HTTP_STATUS: Record<ErrorCode, number> = {

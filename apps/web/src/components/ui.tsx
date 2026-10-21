@@ -3,16 +3,16 @@
 import Link from "next/link";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import type { PublicUser } from "@synkro/shared";
+import type { PublicUser } from "@velora/shared";
 import { useAuth } from "@/store/auth";
 
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <Link href="/" className={`flex items-center gap-2 font-semibold tracking-tight ${className}`}>
       <span className="grid size-7 place-items-center rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-sm text-white">
-        S
+        V
       </span>
-      Synkro
+      Velora Board
     </Link>
   );
 }

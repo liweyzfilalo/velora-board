@@ -1,6 +1,6 @@
 import type { Socket } from "socket.io";
 import { z } from "zod";
-import type { Ack, ClientToServerEvents, PresenceUser, ServerToClientEvents, User } from "@synkro/shared";
+import type { Ack, ClientToServerEvents, PresenceUser, ServerToClientEvents, User } from "@velora/shared";
 import { getUser, verifyToken } from "../auth/auth";
 import * as boards from "../boards/service";
 import { AppError, toAppError } from "../lib/errors";

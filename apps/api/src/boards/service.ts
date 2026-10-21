@@ -12,7 +12,7 @@ import {
   type ChatMessage,
   type List,
   type PublicUser,
-} from "@synkro/shared";
+} from "@velora/shared";
 import type pg from "pg";
 import { config } from "../config";
 import { pool, withTransaction, type Db } from "../db/pool";

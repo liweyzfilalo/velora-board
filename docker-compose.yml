@@ -2,15 +2,15 @@ services:
   postgres:
     image: postgres:17-alpine
     environment:
-      POSTGRES_USER: synkro
-      POSTGRES_PASSWORD: synkro
-      POSTGRES_DB: synkro
+      POSTGRES_USER: velora
+      POSTGRES_PASSWORD: velora
+      POSTGRES_DB: velora
     ports:
       - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U synkro"]
+      test: ["CMD-SHELL", "pg_isready -U velora"]
       interval: 5s
       timeout: 3s
       retries: 10

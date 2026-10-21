@@ -2,7 +2,7 @@
 
 import { useMemo, useRef } from "react";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
-import { byPosition, type Card } from "@synkro/shared";
+import { byPosition, type Card } from "@velora/shared";
 import { useBoard } from "@/store/board";
 import { Composer } from "./InlineEdit";
 import { CursorsLayer } from "./CursorsLayer";

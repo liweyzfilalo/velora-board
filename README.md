@@ -1,8 +1,13 @@
-# Synkro — Kanban collaboratif en temps réel
+# Velora Board — Kanban collaboratif en temps réel
 
 Application SaaS de gestion collaborative façon Trello : plusieurs utilisateurs éditent le même tableau, déplacent des cartes, voient les curseurs des autres et discutent. Tout est synchronisé instantanément.
 
 **Stack** : Next.js 16 (App Router, React 19, TypeScript, Tailwind 4) · Node.js / Express 5 · Socket.io · PostgreSQL · Redis
+
+<p align="center">
+  <img src="docs/demo.gif" alt="Démo : Alice et Bob collaborent sur le même tableau, avec curseurs live, glisser-déposer, chat et conflit d'édition" width="100%">
+</p>
+<p align="center"><sub>Deux navigateurs, deux comptes : curseurs en direct, glisser-déposer synchronisé, chat, puis conflit d'édition résolu dans l'UI. <a href="docs/demo.mp4">Vidéo HD (MP4)</a></sub></p>
 
 ## Fonctionnalités
 

@@ -6,6 +6,10 @@ export async function migrate(log = console.log): Promise<void> {
   await withTransaction(async (client) => {
     // Serialise concurrent migrators (e.g. several API instances booting at once).
     await client.query("SELECT pg_advisory_xact_lock(424242)");
+    const { rows: enc } = await client.query<{ server_encoding: string }>("SHOW server_encoding");
+    if (enc[0]?.server_encoding !== "UTF8") {
+      console.warn(`[migrate] database encoding is ${enc[0]?.server_encoding}, not UTF8: emoji and some characters will be rejected`);
+    }
     await client.query(
       "CREATE TABLE IF NOT EXISTS schema_migrations (id text PRIMARY KEY, applied_at timestamptz NOT NULL DEFAULT now())",
     );

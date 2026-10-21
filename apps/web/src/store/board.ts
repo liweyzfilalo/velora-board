@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { Board, Card, ChatMessage, JoinResult, List, PresenceUser, PublicUser } from "@synkro/shared";
+import type { Board, Card, ChatMessage, JoinResult, List, PresenceUser, PublicUser } from "@velora/shared";
 
 export type ConnectionStatus = "connecting" | "syncing" | "live" | "offline" | "error";
 

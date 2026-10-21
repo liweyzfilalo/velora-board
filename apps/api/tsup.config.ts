@@ -9,5 +9,5 @@ export default defineConfig({
   clean: true,
   sourcemap: true,
   // The shared workspace package ships TypeScript sources: bundle it in.
-  noExternal: ["@synkro/shared"],
+  noExternal: ["@velora/shared"],
 });

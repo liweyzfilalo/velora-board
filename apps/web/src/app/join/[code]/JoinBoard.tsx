@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import type { Board } from "@synkro/shared";
+import type { Board } from "@velora/shared";
 import { FullPageSpinner, RequireAuth } from "@/components/ui";
 import { api } from "@/lib/api";
 

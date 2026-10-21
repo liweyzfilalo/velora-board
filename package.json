@@ -1,5 +1,5 @@
 {
-  "name": "synkro",
+  "name": "velora-board",
   "private": true,
   "workspaces": [
     "apps/*",

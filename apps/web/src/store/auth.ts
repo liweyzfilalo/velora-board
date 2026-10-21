@@ -1,7 +1,7 @@
 import { create } from "zustand";
-import type { AuthResponse, User } from "@synkro/shared";
+import type { AuthResponse, User } from "@velora/shared";
 
-const STORAGE_KEY = "synkro.auth";
+const STORAGE_KEY = "velora-board.auth";
 
 interface AuthState {
   token: string | null;

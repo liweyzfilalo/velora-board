@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Card } from "@synkro/shared";
+import type { Card } from "@velora/shared";
 import { Avatar, Button, inputClass } from "@/components/ui";
 import { errorMessage } from "@/lib/session";
 import { useAuth } from "@/store/auth";

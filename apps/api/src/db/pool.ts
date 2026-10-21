@@ -1,7 +1,7 @@
 import pg from "pg";
 import { config } from "../config";
 
-export const pool = new pg.Pool({ connectionString: config.databaseUrl, max: 20 });
+export const pool = new pg.Pool({ connectionString: config.databaseUrl, max: process.env.VERCEL ? 5 : 20 });
 
 export type Db = pg.Pool | pg.PoolClient;
 

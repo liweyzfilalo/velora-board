@@ -17,7 +17,7 @@ import type {
   JoinResult,
   PresenceUser,
   ServerToClientEvents,
-} from "@synkro/shared";
+} from "@velora/shared";
 
 type Client = Socket<ServerToClientEvents, ClientToServerEvents>;
 

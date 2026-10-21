@@ -1,5 +1,5 @@
 import type { Server } from "socket.io";
-import type { ClientToServerEvents, ServerToClientEvents, User } from "@synkro/shared";
+import type { ClientToServerEvents, ServerToClientEvents, User } from "@velora/shared";
 
 export interface SocketData {
   user: User;

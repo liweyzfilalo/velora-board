@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import type { AuthResponse } from "@synkro/shared";
+import type { AuthResponse } from "@velora/shared";
 import { Button, Logo, inputClass } from "@/components/ui";
 import { ApiError, api } from "@/lib/api";
 import { useAuth } from "@/store/auth";
