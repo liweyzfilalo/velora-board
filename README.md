@@ -4,6 +4,8 @@ Application SaaS de gestion collaborative façon Trello : plusieurs utilisateurs
 
 **Stack** : Next.js 16 (App Router, React 19, TypeScript, Tailwind 4) · Node.js / Express 5 · Socket.io · PostgreSQL · Redis
 
+**▶ En ligne : [velora-board.vercel.app](https://velora-board.vercel.app)** (crée un compte, puis ouvre le lien « Inviter » dans une fenêtre privée pour jouer les deux rôles)
+
 <p align="center">
   <img src="docs/demo.gif" alt="Démo : Alice et Bob collaborent sur le même tableau, avec curseurs live, glisser-déposer, chat et conflit d'édition" width="100%">
 </p>
@@ -23,7 +25,7 @@ Application SaaS de gestion collaborative façon Trello : plusieurs utilisateurs
 
 | Problème | Solution mise en place | Où |
 |---|---|---|
-| **Plusieurs instances API** | Adapter Redis pour Socket.io (pub/sub) : un événement émis sur l'instance A atteint les clients connectés à B. Présence calculée via `fetchSockets()` sur tout le cluster. Transport WebSocket seul, donc pas besoin de sessions collantes. | `apps/api/src/index.ts`, `realtime/socket.ts` |
+| **Plusieurs instances API** | Adapter Redis pour Socket.io (pub/sub) : un événement émis sur l'instance A atteint les clients connectés à B. Sans Redis (cas de la version en ligne, 100 % gratuite), le même rôle est tenu par PostgreSQL `LISTEN/NOTIFY` via l'adapter officiel. Présence calculée via `fetchSockets()` sur tout le cluster. Transport WebSocket seul, donc pas besoin de sessions collantes. | `apps/api/src/index.ts`, `realtime/socket.ts` |
 | **Éditions concurrentes** | Verrouillage optimiste : `UPDATE … WHERE version = $v`. Le perdant reçoit `CONFLICT` avec l'état courant et le client propose de fusionner. | `boards/service.ts → updateCard` |
 | **Déplacements concurrents** | Indexation fractionnaire (une seule ligne réécrite par déplacement) + verrou de ligne `SELECT … FOR UPDATE` sur la liste cible, qui sérialise les insertions au même endroit. Ordre de verrouillage fixe (carte → liste) pour éviter les deadlocks, et retry automatique sur `40001`/`40P01`. | `service.ts → moveCard`, `db/pool.ts` |
 | **Précision des flottants** | Quand l'écart entre deux voisins devient inférieur à 1e-6, la liste est renumérotée dans la même transaction et un événement `cards:rebalanced` est diffusé. | `service.ts → placeItem` |
@@ -46,6 +48,10 @@ packages/
 ```
 
 Le contrat Socket.io (`packages/shared/src/events.ts`) est typé de bout en bout : le client et le serveur partagent les mêmes signatures d'événements et d'acks.
+
+## Déploiement
+
+La version en ligne tourne sur Vercel : le front Next.js et l'API Socket.io sont deux projets séparés (`apps/web`, `apps/api`), et la base est un PostgreSQL Neon. Redis est optionnel : si `REDIS_URL` n'est pas défini en production, l'API passe automatiquement le pub/sub par PostgreSQL et lit les snapshots directement en base. Le même script de concurrence passe dans les deux modes.
 
 ## Démarrage
 

@@ -77,10 +77,11 @@ const revKey = (boardId: string) => `board:${boardId}:rev`;
 const snapKey = (boardId: string, rev: string) => `board:${boardId}:snap:${rev}`;
 
 export async function invalidateBoard(boardId: string): Promise<void> {
-  await redis.incr(revKey(boardId));
+  await redis?.incr(revKey(boardId));
 }
 
 export async function getSnapshot(boardId: string): Promise<BoardSnapshot> {
+  if (!redis) return loadSnapshot(boardId);
   const rev = (await redis.get(revKey(boardId))) ?? "0";
   const cached = await redis.get(snapKey(boardId, rev));
   if (cached) return JSON.parse(cached) as BoardSnapshot;

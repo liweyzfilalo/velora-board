@@ -1,5 +1,7 @@
 import { createServer } from "node:http";
-import { createAdapter } from "@socket.io/redis-adapter";
+import { createAdapter as createPostgresAdapter } from "@socket.io/postgres-adapter";
+import { createAdapter as createRedisAdapter } from "@socket.io/redis-adapter";
+import pg from "pg";
 import cors from "cors";
 import express from "express";
 import helmet from "helmet";
@@ -20,11 +22,15 @@ app.use(express.json({ limit: "100kb" }));
 app.use(router);
 
 const server = createServer(app);
+
+// Cross-instance fan-out: events emitted on one instance reach clients connected
+// to any other. Redis pub/sub when configured, otherwise PostgreSQL LISTEN/NOTIFY.
+const adapterPool = pubClient ? null : new pg.Pool({ connectionString: config.databaseDirectUrl, max: 2 });
 const io: IoServer = new Server(server, {
   cors: { origin: config.corsOrigin },
-  // Redis pub/sub fan-out: events emitted on one instance reach clients connected to any other.
-  adapter: createAdapter(pubClient, subClient),
+  adapter: pubClient && subClient ? createRedisAdapter(pubClient, subClient) : createPostgresAdapter(adapterPool!),
 });
+console.log(`[api] pub/sub via ${pubClient ? "Redis" : "PostgreSQL"}`);
 setIo(io);
 registerRealtime(io);
 
@@ -50,7 +56,7 @@ if (process.env.VERCEL) {
 const shutdown = async (signal: string) => {
   console.log(`[api] ${signal} received, shutting down`);
   io.close();
-  await Promise.allSettled([pool.end(), redis.quit(), pubClient.quit(), subClient.quit()]);
+  await Promise.allSettled([pool.end(), adapterPool?.end(), redis?.quit(), pubClient?.quit(), subClient?.quit()]);
   process.exit(0);
 };
 process.on("SIGINT", () => void shutdown("SIGINT"));

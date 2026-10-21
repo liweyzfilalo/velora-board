@@ -65,4 +65,15 @@ export const migrations: { id: string; sql: string }[] = [
       CREATE INDEX messages_board_created_idx ON messages(board_id, created_at DESC);
     `,
   },
+  {
+    // Used by @socket.io/postgres-adapter for payloads too large for NOTIFY.
+    id: "002_socket_io_attachments",
+    sql: /* sql */ `
+      CREATE TABLE IF NOT EXISTS socket_io_attachments (
+        id         bigserial UNIQUE,
+        created_at timestamptz DEFAULT now(),
+        payload    bytea
+      );
+    `,
+  },
 ];
